@@ -1,0 +1,259 @@
+    /* =================================
+  Base Styles
+==================================== */
+
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+
+body {
+    margin-top: 109px;
+    padding: 0;
+    color: black;
+    font: 300 16px/1.5 'Merriweather', serif;
+}
+
+h1, h2, h3, h4, h5, h6, hgroup, ul, ol, dd, p, figure, pre, table, fieldset, hr, textarea {
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+ul {
+    list-style: none;
+}
+
+img, embed, object, video, iframe {
+    max-width: 100%
+}
+
+label, .submit-btn {
+    cursor: pointer;
+}
+
+label, .contact-info-fset input {
+    display: block;
+}
+
+input[type="text"] {
+    border: 0;
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+.block-el {
+    display: block;
+}
+
+.test {
+    border: 1px solid red;
+}
+
+.hide {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+
+
+/* =================================
+  Content Layout Styles
+==================================== */
+
+
+/* ---- HEADER ---- */
+
+#mainHeader {
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#gallerySearch {
+    font-family: monospace;
+    max-width: 460px;
+    width: 46.938776%;
+    /* 460px / 980px */
+    padding: .6em;
+    border-radius: 5px;
+    border: 2px solid lightgrey;
+}
+
+
+/* ---- MAIN PHOTO GALLERY ---- */
+
+#photoGallery {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#photoGallery img {
+    opacity: 1;
+    transition: opacity .6s;
+}
+
+#photoGallery img:hover {
+    opacity: .8;
+}
+
+
+/* ---- MAIN-GALLERY GRID STYLES ---- */
+
+.col {
+    float: left;
+    width: 48%;
+    text-align: right;
+    margin-bottom: .75em;
+    transition: width 0.2s;
+}
+
+.col+.col:nth-child(2n) {
+    float: right;
+    text-align: left;
+}
+
+
+/* ---- MAIN-GALLERY GRID STYLES ---- */
+
+#lightBox {
+    visibility: hidden;
+    position: fixed;
+    z-index: 300;
+    left: 2.5%;
+    top: 2.5%;
+    width: 95%;
+    height: 95%;
+    overflow: auto;
+    background: rgba(18, 18, 18, .9);
+}
+
+.modal-img-container {
+    position: relative;
+    text-align: center;
+    margin: 5% auto 2.5%;
+    width: 80%;
+    max-width: 900px;
+}
+
+.modal-description {
+    width: 90%;
+    color: #fff;
+    font-family: monospace;
+    margin: 0 auto;
+}
+
+.modal-prev, .modal-next, .modal-close {
+    border: none;
+    background: none;
+    position: absolute;
+    color: #fff;
+    font-family: sans-serif;
+}
+
+.modal-prev, .modal-next {
+    font-size: 2rem;
+    /* 3rem */
+    top: 0;
+    bottom: 0;
+}
+
+.modal-prev {
+    left: -.9em;
+}
+
+.modal-next {
+    top: -.4em;
+    right: -.9em;
+}
+
+.modal-close {
+    right: .5em;
+    top: .25em;
+    color: lightgrey;
+    font-size: 1em;
+    /* 2em */
+}
+
+.modal-prev,
+.modal-next,
+.modal-close {
+    color: #c2c6c7;
+}
+
+.modal-next:hover, .modal-prev:hover, .modal-close:hover {
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+}
+
+
+/* ---- ClearFix ---- */
+
+.cf:before, .cf:after {
+    display: table;
+    content: " ";
+}
+
+.cf:after {
+    clear: both;
+}
+
+
+/* ---- Media Queries ---- */
+
+@media (min-width: 768px), (orientation: landscape) {
+    /* - Font Sizing - */
+    /* - Header / Nav - */
+    .wrapper {
+        max-width: 980px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .col {
+        float: left;
+        width: 20.408163%;
+        /* 200px / 980px */
+        max-width: 200px;
+        max-height: 200px;
+        margin-left: 3.061224%;
+        /* 30px / 980px */
+        margin-right: 3.061224%;
+        /* 30px / 980px */
+        margin-bottom: 6.122449%;
+        /* 60px / 980px */
+    }
+    .col+.col:nth-child(2n) {
+        float: left;
+        /*text-align: left;*/
+    }
+    /* Removes Left gutter margin from first column */
+    .col:nth-child(4n + 1) {
+        margin-left: 0;
+    }
+    /* Removes Right gutter margin from last column */
+    .col:nth-child(4n) {
+        margin-right: 0;
+    }
+    .modal-next, .modal-prev {
+        font-size: 3em;
+    }
+    .modal-close {
+        font-size: 2em;
+    }
+    .modal-description {
+        max-width: 600px;
+    }
+}
