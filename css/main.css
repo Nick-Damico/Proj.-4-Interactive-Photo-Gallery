@@ -109,8 +109,7 @@ Content Layout Styles
   opacity: .8;
 }
 
-
-/* ---- MAIN-GALLERY GRID STYLES ---- */
+/* ---- MAIN-GALLERY COLUMN GRID STYLES ---- */
 
 .col {
   float: left;
@@ -127,7 +126,7 @@ Content Layout Styles
 }
 
 
-/* ---- MAIN-GALLERY GRID STYLES ---- */
+/* ---- lIGHTBOX/ MODAL STYLES ---- */
 
 #lightBox {
   visibility: hidden;
@@ -199,6 +198,12 @@ Content Layout Styles
   outline: none;
   color: #fff;
 }
+
+.modal-next:focus, 
+.modal-prev:focus {
+    outline: none; 
+}
+
 
 
 /* ---- ClearFix ---- */

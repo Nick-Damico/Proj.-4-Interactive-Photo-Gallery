@@ -9,7 +9,7 @@ var thumbnail = document.querySelectorAll(".thumbnail");
 var searchBar = document.querySelector("#gallerySearch");
 var cols = document.querySelectorAll(".col");
 
-// MODAL CONSTRUCT
+// MODAL SELECTORS
 var lightBox = document.getElementById("lightBox");
 var closeBtn = document.querySelector(".modal-close");
 var modalImage = document.querySelector(".modal-photo");
@@ -30,31 +30,37 @@ searchBar.addEventListener("keyup", function() {
     filter(this.value.trim().toLowerCase());
 });
 
+
 // LOOP ADDS EVENT HANDLER "CLICK" TO img.thumbnails & a.photo.
-for (var i = 0; i < photo.length; i++) {
+(function() {
+        for (var i = 0; i < photo.length; i++) {
+    
+        // ADD EVENT "CLICK"
+        photo[i].addEventListener("click", function() {
+            // PREVENTS A LINK FROM OPENING URL, STOP DEFAULT BEHAVIOR.
+            event.preventDefault();
+            // UPDATES LIGHTBOX IMG TO CLICKED IMAGE.
+            modalImage.setAttribute("src", this.getAttribute("href"));
+        });
+        // CLICK OPENS LIGHTBOX MODAL.
+        thumbnail[i].addEventListener("click", function() {
+            // TURNS LIGHTBOX 'ON' WITH IMG 'CLICK'.
+            lightBox.style.visibility = "visible";
+            // UPDATES LIGHTBOX CAPTION TEXT FROM 'CLICKED' IMG [ATTR="ALT"]
+            modalAbout.textContent = this.getAttribute("alt");
+        });
 
-    // ADD EVENT "CLICK"
-    photo[i].addEventListener("click", function(event, i) {
-        // PREVENTS A LINK FROM OPENING URL, STOP DEFAULT BEHAVIOR.
-        event.preventDefault();
-        // UPDATES LIGHTBOX IMG TO CLICKED IMAGE.
-        modalImage.setAttribute("src", this.getAttribute("href"));
-    });
-    // CLICK OPENS LIGHTBOX MODAL.
-    thumbnail[i].addEventListener("click", function() {
-        // TURNS LIGHTBOX 'ON' WITH IMG 'CLICK'.
-        lightBox.style.visibility = "visible";
-        // UPDATES LIGHTBOX CAPTION TEXT FROM 'CLICKED' IMG [ATTR="ALT"]
-        modalAbout.textContent = this.getAttribute("alt");
-    });
+        // BUILDS AN ARRAY OF OBJECTS FROM THE .PHOTO ELEMENTS.
+        cache.push({
+            element: thumbnail[i],
+            text: thumbnail[i].getAttribute("alt").trim().toLowerCase()
+        });
 
-    // BUILDS AN ARRAY OF OBJECTS FROM THE .PHOTO ELEMENTS.
-    cache.push({
-        element: thumbnail[i],
-        text: thumbnail[i].getAttribute("alt").trim().toLowerCase()
-    });
+    }
+   
 
-}
+}() );
+
 
 // EVENT HANDLER FOR .closeBtn TURNS OFF LIGHTBOX.
 closeBtn.addEventListener("click", close);
