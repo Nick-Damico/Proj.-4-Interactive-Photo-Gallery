@@ -34,7 +34,7 @@ searchBar.addEventListener("keyup", function() {
 // LOOP ADDS EVENT HANDLER "CLICK" TO img.thumbnails & a.photo.
 (function() {
         for (var i = 0; i < photo.length; i++) {
-    
+
         // ADD EVENT "CLICK"
         photo[i].addEventListener("click", function() {
             // PREVENTS A LINK FROM OPENING URL, STOP DEFAULT BEHAVIOR.
@@ -57,10 +57,9 @@ searchBar.addEventListener("keyup", function() {
         });
 
     }
-   
+
 
 }() );
-
 
 // EVENT HANDLER FOR .closeBtn TURNS OFF LIGHTBOX.
 closeBtn.addEventListener("click", close);
@@ -75,7 +74,7 @@ nextBtn.addEventListener("click", nextPic);
 document.onkeydown = function() {
     switch (window.event.keyCode) {
 
-        // LEFT ARROW 
+        // LEFT ARROW
         case 37:
         prevPic();
         break;
