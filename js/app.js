@@ -134,7 +134,9 @@ function modalDisplay(num) {
 
 // FILTERS IMAGES BASED ON SEARCH BAR INPUT
 function filter(search) {
+    var liItem = '';
     for (var i = 0; i < cache.length; i++) {
+        liItem = cols[i];
         // CACHE ARRAY TEXT : VALUE STORED.
         var query = cache[i].text;
         // QUERY VALUE indexOf FOR SearchBar value.
@@ -142,7 +144,12 @@ function filter(search) {
         // .col ELEMENT DISPLAYS NONE.
         // ELSE QUERY MATCHES SEARCHBAR VALUE.
         // .col ELEMENT DISPLAYED BLOCK, DEFAULT DISPLAY.
-        query.indexOf(search) === -1 ? cols[i].classList.add("hide") : cols[i].classList.remove("hide");
+        if(query.indexOf(search) === -1 ){
+            Velocity(liItem, {opacity: 0}, {display: 'none'});
+        } else {
+            Velocity(liItem, {opacity: 1}, {display: "block"});
+        }
+        // query.indexOf(search) === -1 ? )  : );
     }
 
 
