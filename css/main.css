@@ -140,7 +140,7 @@ Content Layout Styles
   background: rgba(18, 18, 18, .9);
 }
 
-.modal-img-container {
+.lightbox-img-container {
   position: relative;
   text-align: center;
   margin: 5% auto 2.5%;
@@ -148,14 +148,14 @@ Content Layout Styles
   max-width: 900px;
 }
 
-.modal-description {
+.img-description {
   width: 90%;
   color: #fff;
   font-family: monospace;
   margin: 0 auto;
 }
 
-.modal-prev, .modal-next, .modal-close {
+.lightbox-prev, .lightbox-next, .lightbox-close {
   border: none;
   background: none;
   position: absolute;
@@ -163,23 +163,31 @@ Content Layout Styles
   font-family: sans-serif;
 }
 
-.modal-prev, .modal-next {
+.lightbox-prev, .lightbox-next {
   font-size: 2rem;
   /* 3rem */
   top: 0;
   bottom: 0;
 }
 
-.modal-prev {
+.lightbox-prev {
   left: -.9em;
 }
 
-.modal-next {
+.lightbox-prev::after {
+  content: '<';
+}
+
+.lightbox-next {
   top: -.4em;
   right: -.9em;
 }
 
-.modal-close {
+.lightbox-next::after {
+  content: '>';
+}
+
+.lightbox-close {
   right: .5em;
   top: .25em;
   color: lightgrey;
@@ -187,22 +195,31 @@ Content Layout Styles
   /* 2em */
 }
 
-.modal-prev,
-.modal-next,
-.modal-close {
+.lightbox-close img {
+  width: 1.25em; /* 40px / 32px */
+}
+
+.lightbox-close img:hover {
+  animation: grow .4s ease-out;
+}
+
+.lightbox-prev,
+.lightbox-next,
+.lightbox-close {
   color: #c2c6c7;
 }
 
-.modal-next:hover, .modal-prev:hover, .modal-close:hover {
+.lightbox-next:hover, .lightbox-prev:hover, .lightbox-close:hover {
   cursor: pointer;
   outline: none;
   color: #fff;
 }
 
-.modal-next:focus, 
-.modal-prev:focus {
-    outline: none; 
+.lightbox-next:focus,
+.lightbox-prev:focus {
+    outline: none;
 }
+
 
 
 
@@ -217,6 +234,14 @@ Content Layout Styles
   clear: both;
 }
 
+@keyframes grow {
+  50% {
+    transform: scale(1.2);
+  }
+  80% {
+    transform: scale(.8);
+  }
+}
 
 /* ---- Media Queries ---- */
 
@@ -254,13 +279,13 @@ Content Layout Styles
   .col:nth-child(4n) {
     margin-right: 0;
   }
-  .modal-next, .modal-prev {
+  .lightbox-next, .lightbox-prev {
     font-size: 3em;
   }
-  .modal-close {
+  .lightbox-close {
     font-size: 2em;
   }
-  .modal-description {
+  .img-description {
     max-width: 600px;
   }
 }
