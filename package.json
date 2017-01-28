@@ -1,0 +1,29 @@
+{
+  "name": "(interactive-photo-gallery)",
+  "version": "1.0.0",
+  "description": "Techdegree Project 4 Interactive Photo Gallery",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nick-Damico/Proj.-4-Interactive-Photo-Gallery.git"
+  },
+  "keywords": [
+    "Techdgree",
+    "Treehouse",
+    "Photo",
+    "Gallery",
+    "Interactive"
+  ],
+  "author": "Nicholas D'Amico nickalan82@icloud.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nick-Damico/Proj.-4-Interactive-Photo-Gallery/issues"
+  },
+  "homepage": "https://nick-damico.github.io/Proj.-4-Interactive-Photo-Gallery/",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
