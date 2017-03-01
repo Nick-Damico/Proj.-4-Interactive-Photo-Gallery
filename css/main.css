@@ -253,7 +253,14 @@ Content Layout Styles
     outline: none;
 }
 
-
+@keyframes grow {
+  50% {
+    transform: scale(1.2);
+  }
+  80% {
+    transform: scale(.8);
+  }
+}
 
 
 /* ---- ClearFix ---- */
