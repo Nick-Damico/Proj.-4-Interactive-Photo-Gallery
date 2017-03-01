@@ -110,8 +110,24 @@ Content Layout Styles
 }
 
 /* ---- MAIN-GALLERY COLUMN GRID STYLES ---- */
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .col {
+  width: 48%;
+}
+
+/* OLD LAYOUT
+    SWITCHED TO FLEXBOX LAYOUT DUE TO LAYOUT ISSUES
+    WHEN SEARCH FILTERING GALLERY ITEMS
+*/
+
+/*.col {
   float: left;
   width: 48%;
   text-align: right;
@@ -123,7 +139,7 @@ Content Layout Styles
 .col+.col:nth-child(2n) {
   float: right;
   text-align: left;
-}
+}*/
 
 
 /* ---- lIGHTBOX/ MODAL STYLES ---- */
@@ -253,32 +269,17 @@ Content Layout Styles
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    justify-content: space-around;
   }
   .col {
-    float: left;
     width: 20.408163%;
     /* 200px / 980px */
     max-width: 200px;
     max-height: 200px;
-    margin-left: 3.061224%;
-    /* 30px / 980px */
-    margin-right: 3.061224%;
-    /* 30px / 980px */
     margin-bottom: 6.122449%;
     /* 60px / 980px */
   }
-  .col+.col:nth-child(2n) {
-    float: left;
-    /*text-align: left;*/
-  }
-  /* Removes Left gutter margin from first column */
-  .col:nth-child(4n + 1) {
-    margin-left: 0;
-  }
-  /* Removes Right gutter margin from last column */
-  .col:nth-child(4n) {
-    margin-right: 0;
-  }
+
   .lightbox-next, .lightbox-prev {
     font-size: 3em;
   }
