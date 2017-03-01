@@ -3,7 +3,6 @@
 // NICHOLASDAMICO.NET
 // SEPT 21 2016
 
-console.log("start");
 var photo = document.querySelectorAll(".photo");
 var thumbnail = document.querySelectorAll(".thumbnail");
 var searchBar = document.querySelector("#gallerySearch");
@@ -20,6 +19,69 @@ var prevBtn = document.querySelector(".lightbox-prev");
 // GLOBAL VARIABLES
 var counter = 0;
 var cache = [];
+
+//////////////////////////////////////////////////////
+///////     FUNCTIONS
+//////////////////////////////////////////////////////
+
+// LIGHTBOX CLOSE
+function close() {
+    lightBox.style.visibility = "hidden";
+}
+
+// LIGHTBOX CHANGE TO NEXT PIC BTN.
+function nextPic() {
+    counter += 1;
+    if (counter > photo.length - 1) {
+        counter = 0;
+    }
+    modalDisplay(counter);
+}
+
+// LIGHTBOX CHANGE TO PREV PIC BTN.
+function prevPic() {
+    counter -= 1;
+    if (counter < 0) {
+        counter = photo.length - 1;
+    }
+    modalDisplay(counter);
+}
+
+// UPDATES LIGHTBOX IMG AND DESCRIPTION, CALL FROM prevPic() or nextPic();
+function modalDisplay(num) {
+    // UPDATE LIGHTBOX IMG SRC TAG FROM .PHOTO
+    lightboxImg.setAttribute("src", photo[num].getAttribute("href"));
+    // UPDATE LIGHTBOX CAPTION W/ ALT TAG OF .THUMBNAIL
+    lightboxAbout.textContent = thumbnail[num].getAttribute("alt");
+}
+
+// FILTERS IMAGES BASED ON SEARCH BAR INPUT
+function filter(search) {
+    var liItem = '';
+    for (var i = 0; i < cache.length; i++) {
+        liItem = cols[i];
+        // CACHE ARRAY TEXT : VALUE STORED.
+        var queryText = cache[i].text;
+        var queryTitle = cache[i].title;
+        // QUERY VALUE indexOf FOR SearchBar value.
+        // IF QUERY DOESN'T CONTAIN SEARCHBAR VALUE.
+        // .col ELEMENT DISPLAYS NONE.
+        // ELSE QUERY MATCHES SEARCHBAR VALUE.
+        // .col ELEMENT DISPLAYED BLOCK, DEFAULT DISPLAY.
+        if(queryText.indexOf(search) === -1 && queryTitle.indexOf(search) === -1 ) {
+            // Velocity(liItem, "fadeOut", 700);
+            Velocity(liItem, {opacity: 0}, 300);
+        } else {
+            // Velocity(liItem, "fadeIn", 700);
+            Velocity(liItem, {opacity: 1}, 300);
+        }
+    }
+
+
+}
+//////////////////////////////////////////////////////
+///////     END/OF FUNCTIONS
+//////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////
 /////// 	EVENT HANDLERS
@@ -53,7 +115,8 @@ searchBar.addEventListener("keyup", function() {
         // BUILDS AN ARRAY OF OBJECTS FROM THE .PHOTO ELEMENTS.
         cache.push({
             element: thumbnail[i],
-            text: thumbnail[i].getAttribute("alt").trim().toLowerCase()
+            text: thumbnail[i].getAttribute("alt").trim().toLowerCase(),
+            title: thumbnail[i].getAttribute("title").toLowerCase()
         });
 
     }
@@ -97,64 +160,4 @@ document.onkeydown = function() {
 
 
 
-//////////////////////////////////////////////////////
-/////// 	FUNCTIONS
-//////////////////////////////////////////////////////
 
-// LIGHTBOX CLOSE
-function close() {
-    lightBox.style.visibility = "hidden";
-}
-
-// LIGHTBOX CHANGE TO NEXT PIC BTN.
-function nextPic() {
-    counter += 1;
-    if (counter > photo.length - 1) {
-        counter = 0;
-    }
-    modalDisplay(counter);
-}
-
-// LIGHTBOX CHANGE TO PREV PIC BTN.
-function prevPic() {
-    counter -= 1;
-    if (counter < 0) {
-        counter = photo.length - 1;
-    }
-    modalDisplay(counter);
-}
-
-// UPDATES LIGHTBOX IMG AND DESCRIPTION, CALL FROM prevPic() or nextPic();
-function modalDisplay(num) {
-    // UPDATE LIGHTBOX IMG SRC TAG FROM .PHOTO
-    lightboxImg.setAttribute("src", photo[num].getAttribute("href"));
-    // UPDATE LIGHTBOX CAPTION W/ ALT TAG OF .THUMBNAIL
-    lightboxAbout.textContent = thumbnail[num].getAttribute("alt");
-}
-
-// FILTERS IMAGES BASED ON SEARCH BAR INPUT
-function filter(search) {
-    var liItem = '';
-    for (var i = 0; i < cache.length; i++) {
-        liItem = cols[i];
-        // CACHE ARRAY TEXT : VALUE STORED.
-        var query = cache[i].text;
-        // QUERY VALUE indexOf FOR SearchBar value.
-        // IF QUERY DOESN'T CONTAIN SEARCHBAR VALUE.
-        // .col ELEMENT DISPLAYS NONE.
-        // ELSE QUERY MATCHES SEARCHBAR VALUE.
-        // .col ELEMENT DISPLAYED BLOCK, DEFAULT DISPLAY.
-        if(query.indexOf(search) === -1 ){
-            Velocity(liItem, {opacity: 0}, {display: 'none'});
-        } else {
-            Velocity(liItem, {opacity: 1}, {display: "block"});
-        }
-        // query.indexOf(search) === -1 ? )  : );
-    }
-
-
-}
-console.log('end');
-//////////////////////////////////////////////////////
-/////// 	END/OF FUNCTIONS
-//////////////////////////////////////////////////////
