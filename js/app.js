@@ -13,6 +13,7 @@ var lightBox = document.getElementById("lightBox");
 var closeBtn = document.querySelector(".lightbox-close");
 var lightboxImg = document.querySelector(".lightbox-photo");
 var lightboxAbout = document.querySelector(".img-description");
+var lightboxContent = document.querySelector(".lightbox-content");
 var nextBtn = document.querySelector(".lightbox-next");
 var prevBtn = document.querySelector(".lightbox-prev");
 
@@ -26,7 +27,8 @@ var cache = [];
 
 // LIGHTBOX CLOSE
 function close() {
-    lightBox.style.visibility = "hidden";
+    // lightBox.style.visibility = "hidden";
+    Velocity(lightBox, "fadeOut", 800);
 }
 
 // LIGHTBOX CHANGE TO NEXT PIC BTN.
@@ -108,6 +110,7 @@ searchBar.addEventListener("keyup", function() {
         thumbnail[i].addEventListener("click", function() {
             // TURNS LIGHTBOX 'ON' WITH IMG 'CLICK'.
             lightBox.style.visibility = "visible";
+            Velocity(lightBox, "fadeIn", 800);
             // UPDATES LIGHTBOX CAPTION TEXT FROM 'CLICKED' IMG [ATTR="ALT"]
             lightboxAbout.textContent = this.getAttribute("alt");
         });
