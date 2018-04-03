@@ -57,33 +57,34 @@ function modalDisplay(num) {
     lightboxAbout.textContent = thumbnail[num].getAttribute("alt");
 }
 
-// FILTERS IMAGES BASED ON SEARCH BAR INPUT
 function filter(search) {
-    var liItem = '';
-    for (var i = 0; i < cache.length; i++) {
-        liItem = cols[i];
-        // CACHE ARRAY TEXT : VALUE STORED.
-        var queryText = cache[i].text;
-        var queryTitle = cache[i].title;
-        // QUERY VALUE indexOf FOR SearchBar value.
-        // IF QUERY DOESN'T CONTAIN SEARCHBAR VALUE.
-        // .col ELEMENT DISPLAYS NONE.
-        // ELSE QUERY MATCHES SEARCHBAR VALUE.
-        // .col ELEMENT DISPLAYED BLOCK, DEFAULT DISPLAY.
-        if(queryText.indexOf(search) === -1 && queryTitle.indexOf(search) === -1 ) {
-            // Velocity(liItem, "fadeOut", 700);
-            Velocity(liItem, {opacity: 0}, 300);
-        } else {
-            // Velocity(liItem, "fadeIn", 700);
-            Velocity(liItem, {opacity: 1}, 300);
-        }
+var liItem = '';
+const wrapperEl = document.querySelector('.wrapper');
+for (var i = 0; i < cache.length; i++) {
+    liItem = cols[i];
+    // CACHE ARRAY TEXT : VALUE STORED.
+    var queryText = cache[i].text;
+    var queryTitle = cache[i].title;
+    // QUERY VALUE indexOf FOR SearchBar value.
+    // IF QUERY DOESN'T CONTAIN SEARCHBAR VALUE.
+    // .col ELEMENT DISPLAYS NONE.
+    // ELSE QUERY MATCHES SEARCHBAR VALUE.
+    // .col ELEMENT DISPLAYED BLOCK, DEFAULT DISPLAY.
+    // debugger;
+    if(queryText.indexOf(search) >= 0 || queryTitle.indexOf(search) >= 0 ) {
+      liItem.style.display = 'initial';
+    } else {
+      liItem.style.display = 'none'
     }
-
-
+  }
 }
+
+
 //////////////////////////////////////////////////////
 ///////     END/OF FUNCTIONS
 //////////////////////////////////////////////////////
+
+
 
 //////////////////////////////////////////////////////
 /////// 	EVENT HANDLERS
@@ -160,7 +161,3 @@ document.onkeydown = function() {
 //////////////////////////////////////////////////////
 /////// 	END/OF EVENT HANDLERS
 //////////////////////////////////////////////////////
-
-
-
-

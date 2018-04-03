@@ -136,27 +136,8 @@ Content Layout Styles
 .col {
   width: 48%;
   margin-bottom: .5em;
+  transition: opacity .4s ease;
 }
-
-/* OLD LAYOUT
-    SWITCHED TO FLEXBOX LAYOUT DUE TO LAYOUT ISSUES
-    WHEN SEARCH FILTERING GALLERY ITEMS
-*/
-
-/*.col {
-  float: left;
-  width: 48%;
-  text-align: right;
-  margin-bottom: .75em;
-  -webkit-transition: width 0.2s;
-  transition: width 0.2s;
-}
-
-.col+.col:nth-child(2n) {
-  float: right;
-  text-align: left;
-}*/
-
 
 /* ---- lIGHTBOX/ MODAL STYLES ---- */
 
