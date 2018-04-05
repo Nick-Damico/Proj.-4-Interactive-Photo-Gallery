@@ -19,7 +19,7 @@ var prevBtn = document.querySelector(".lightbox-prev");
 
 // GLOBAL VARIABLES
 var counter = 0;
-var cache = [];
+var photoArr = [];
 
 //////////////////////////////////////////////////////
 ///////     FUNCTIONS
@@ -33,50 +33,69 @@ function close() {
 
 // LIGHTBOX CHANGE TO NEXT PIC BTN.
 function nextPic() {
-    counter += 1;
-    if (counter > photo.length - 1) {
-        counter = 0;
+    if (counter === photoArr.length - 1) {
+      counter = 0;
+    } else {
+      counter++;
     }
-    modalDisplay(counter);
+
+    while (!photoArr[counter].active) {
+      counter++;
+      if (counter === photo.length) {
+        counter = 0;
+      }
+    }
+    modalDisplay(photoArr[counter]);
 }
 
 // LIGHTBOX CHANGE TO PREV PIC BTN.
 function prevPic() {
-    counter -= 1;
-    if (counter < 0) {
-        counter = photo.length - 1;
+  if (counter === 0) {
+    counter = photoArr.length - 1;
+  } else {
+    counter--;
+  }
+
+  while (!photoArr[counter].active) {
+    counter--;
+    if (counter <= 0) {
+      counter = photoArr.length - 1;
     }
-    modalDisplay(counter);
+  }
+  modalDisplay(photoArr[counter]);
 }
 
 // UPDATES LIGHTBOX IMG AND DESCRIPTION, CALL FROM prevPic() or nextPic();
-function modalDisplay(num) {
+function modalDisplay(photo) {
     // UPDATE LIGHTBOX IMG SRC TAG FROM .PHOTO
-    lightboxImg.setAttribute("src", photo[num].getAttribute("href"));
+    lightboxImg.setAttribute("src", photo.src);
     // UPDATE LIGHTBOX CAPTION W/ ALT TAG OF .THUMBNAIL
-    lightboxAbout.textContent = thumbnail[num].getAttribute("alt");
+    lightboxAbout.textContent = photo.text;
 }
 
 function filter(search) {
 var liItem = '';
 const wrapperEl = document.querySelector('.wrapper');
-for (var i = 0; i < cache.length; i++) {
+for (var i = 0; i < photoArr.length; i++) {
     liItem = cols[i];
     // CACHE ARRAY TEXT : VALUE STORED.
-    var queryText = cache[i].text;
-    var queryTitle = cache[i].title;
-    // QUERY VALUE indexOf FOR SearchBar value.
-    // IF QUERY DOESN'T CONTAIN SEARCHBAR VALUE.
-    // .col ELEMENT DISPLAYS NONE.
-    // ELSE QUERY MATCHES SEARCHBAR VALUE.
-    // .col ELEMENT DISPLAYED BLOCK, DEFAULT DISPLAY.
-    // debugger;
+    var queryText = photoArr[i].text;
+    var queryTitle = photoArr[i].title;
+
     if(queryText.indexOf(search) >= 0 || queryTitle.indexOf(search) >= 0 ) {
       liItem.style.display = 'initial';
+      photoArr[i].active = true;
     } else {
-      liItem.style.display = 'none'
+      liItem.style.display = 'none';
+      photoArr[i].active = false;
     }
   }
+}
+
+function getPhotoId(photo) {
+  let selectedPhoto = photoArr.filter(p =>
+    p.title === photo.firstElementChild.title.toLowerCase());
+    return selectedPhoto[0].id;
 }
 
 
@@ -104,8 +123,12 @@ searchBar.addEventListener("keyup", function() {
         photo[i].addEventListener("click", function() {
             // PREVENTS A LINK FROM OPENING URL, STOP DEFAULT BEHAVIOR.
             event.preventDefault();
+            counter = getPhotoId(this);
             // UPDATES LIGHTBOX IMG TO CLICKED IMAGE.
-            elLightBoxImg.setAttribute("src", this.getAttribute("href"));
+            elLightBoxImg.setAttribute(
+              "src",
+              this.firstElementChild.getAttribute('data-full-image')
+            );
         });
         // CLICK OPENS LIGHTBOX MODAL.
         thumbnail[i].addEventListener("click", function() {
@@ -114,13 +137,16 @@ searchBar.addEventListener("keyup", function() {
             Velocity(lightBox, "fadeIn", 800);
             // UPDATES LIGHTBOX CAPTION TEXT FROM 'CLICKED' IMG [ATTR="ALT"]
             lightboxAbout.textContent = this.getAttribute("alt");
+
         });
 
         // BUILDS AN ARRAY OF OBJECTS FROM THE .PHOTO ELEMENTS.
-        cache.push({
-            element: thumbnail[i],
+        photoArr.push({
+            id: i,
+            src: thumbnail[i].getAttribute("data-full-image"),
             text: thumbnail[i].getAttribute("alt").trim().toLowerCase(),
-            title: thumbnail[i].getAttribute("title").toLowerCase()
+            title: thumbnail[i].getAttribute("title").toLowerCase(),
+            active: true
         });
 
     }
