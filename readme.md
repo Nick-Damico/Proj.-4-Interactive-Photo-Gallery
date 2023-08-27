@@ -1,11 +1,19 @@
-// Author: Nicholas D'Amico Contact: nickalan82@icloud.com Front End Techdegree Program
+Responsive Photo Gallery
+Overview
+This project was part of the Treehouse Front End Techdegree program. The objective of this project was to use HTML5 and CSS to build a responsive photo gallery. JavaScript was utilitized to add a modal pop-up and image carousel with text search filtering.
 
-// Checked project in: Chorme 55 64-bit FireFox 50.0 & 49.0.1 Safari 10.0.2
+Technologies
+HTML5
+CSS3
+CSS Flexbox
+JavaScript
 
-** Treehouse | Front End Techdegree Project: 4 Interactive Photo Gallery **
+Screenshot
 
+Demo
+You can see a live demo of this project by visiting the following link: Web App Dashboard
 // View Project 4 here.. https://nick-damico.github.io/Proj.-4-Interactive-Photo-Gallery/..
 
-Instructions : In this project, you will create an interactive photo gallery using JavaScript and jQuery. Thumbnails and photos will be provided with descriptions.
+For any inquiries or feedback, please reach out via the provided contact email.
 
-At the top of the page you'll have a search area where photos will hide and show depending on user input. When the user clicks on a thumbnail the photo will display in a lightbox. There should be a back and previous buttons to cycle through photos.
+Happy exploring!
